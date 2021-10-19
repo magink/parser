@@ -5,15 +5,16 @@ import com.github.magink.tokenizer.Grammar;
 import com.github.magink.tokenizer.LexicalException;
 import com.github.magink.tokenizer.Tokenizer;
 
-public class TokenAdapter implements TokenReceiver {
+public class TokenizerAdapter implements TokenReceiver {
 
   private Tokenizer tokenizer;
   private Grammar grammar;
 
-  public TokenAdapter(String toTokenize){
+  public TokenizerAdapter(String toTokenize){
     setupWordAndDotGrammar();
     setupTokenizer(toTokenize);
   }
+
   @Override
   public void next() { 
     try {
@@ -22,12 +23,18 @@ public class TokenAdapter implements TokenReceiver {
       System.out.println(e);
     }
   }
+
+  @Override
   public boolean hasNext() {
     return tokenizer.getActiveTokenType().equals("END");
   }
+
+  @Override
   public String getValue(){
     return tokenizer.getActiveTokenValue();
   }
+
+  @Override
   public String getType(){
     return tokenizer.getActiveTokenType();
   }
@@ -39,6 +46,7 @@ public class TokenAdapter implements TokenReceiver {
       System.out.println(e);
     }
   }
+  
   private void setupWordAndDotGrammar() {
     grammar = new Grammar();
     grammar.addType(Word.REGEX, Word.TYPE);
