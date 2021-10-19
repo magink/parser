@@ -5,9 +5,9 @@ package com.github.magink.parser;
 public class Parser {
 
   private Document document;
-   
+
   public Parser(String toParse) {
-    TokenAdapter tokenAdapter = new TokenAdapter(toParse);
+    TokenizerAdapter tokenAdapter = new TokenizerAdapter(toParse);
     document = new Document();
     while(tokenAdapter.hasNext()) {
       String tokenType = tokenAdapter.getType();
