@@ -17,16 +17,18 @@ public class TokenizerAdapter implements TokenReceiver {
 
   @Override
   public void next() { 
-    try {
-      tokenizer.nextToken();
-    } catch(LexicalException e) {
-      System.out.println(e);
+    if(hasNext()) {
+      try {
+        tokenizer.nextToken();
+      } catch(LexicalException e) {
+        System.out.println(e);
+      }
     }
   }
 
   @Override
   public boolean hasNext() {
-    return tokenizer.getActiveTokenType().equals("END");
+    return !tokenizer.getActiveTokenType().equals("END");
   }
 
   @Override
