@@ -2,33 +2,46 @@ package com.github.magink.parser;
 
 import java.util.ArrayList;
 
-public class Sentence {
-  private int current = 0;
+public class Sentence extends Node implements EndType {
+  private int selectedWord = 0;
   private ArrayList<Word> words;
   private EndType endType;
   
-  public Sentence() {
+  protected Sentence() {
     endType = new Dot();
+    words = new ArrayList<>();
   }
   public String getEndType() {
     return endType.getEndType();
   }
   public void nextWord(){
-    current = (current < words.size()) ? current + 1: words.size();
+    selectedWord = (selectedWord < words.size()) ? selectedWord + 1: words.size() ;
   }
   public void previousWord() {
-    current = (current > 0 ) ? current - 1 : 0;
+    selectedWord = (selectedWord > 0 ) ? selectedWord - 1 : 0;
   }
   public Word getWord(){
-    return words.get(current);
+    return words.get(selectedWord);
   }
   public String getWords() {
     StringBuilder sentence = new StringBuilder();
-    words.forEach(word -> {
-      sentence.append(word.getReadableWord() + " ");
-    });
-    sentence.append(endType.getEndType());
+    int i = 0;
+    for(Word word: words) {
+      sentence.append(word.getReadableWord());
+      i++;
+      sentence.append(i < words.size() ? " ": endType.getEndType());
+    }
     return sentence.toString();
   }
+  
+  @Override
+  protected void parse(String type, String value) {
+    if(type.equals(Word.TYPE)) {
+      Word nextWord = new Word(value);
+      words.add(nextWord);
+    }
+  }
+
+  
   
 }

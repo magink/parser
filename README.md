@@ -17,4 +17,5 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 ## Dependencies
 
-This project depends on [tokenizer](https://github.com/magink/tokenizer) and junit. Add both
+This project depends on [tokenizer](https://github.com/magink/tokenizer) and junit.
+You can run your custom tokenizer by implementing your own adapter class that implements TokenReceiver.

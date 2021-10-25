@@ -8,7 +8,6 @@ public class Dot implements EndType {
   }
   @Override
   public String getEndType() {
-    // TODO Auto-generated method stub
-    return null;
+    return TYPE;
   }
 }

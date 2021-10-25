@@ -1,5 +1,9 @@
 package com.github.magink.parser;
 
+import java.util.Iterator;
+
+import com.github.magink.tokenizer.Token;
+
 /**
  * The boundary towards the tokenizer/lexer.
  */
@@ -24,4 +28,9 @@ public interface TokenReceiver {
    * @return the value of the current token
    */
   public String getValue();
+
+  /**
+   * @return the token with both 
+   */
+  public Iterator<Token> getTokens();
 }

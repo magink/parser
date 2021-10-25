@@ -1,26 +1,24 @@
 package com.github.magink.parser;
 
 
-
 public class Parser {
 
   private Document document;
+  TokenReceiver tokenizer;
 
-  public Parser(String toParse) {
-    TokenizerAdapter tokenAdapter = new TokenizerAdapter(toParse);
+  public Parser(TokenReceiver tokenizer) {
+    this.tokenizer = tokenizer;
     document = new Document();
-    while(tokenAdapter.hasNext()) {
-      String tokenType = tokenAdapter.getType();
-      if (tokenType.equals(Word.TYPE)) {
+  }
 
-      }
-      if(tokenType.equals(Dot.TYPE)) {
-        document = new Document();
-      }
-      
-      tokenAdapter.next();
+  public Document parse() {
+    while(tokenizer.hasNext()) {
+      String tokenType = tokenizer.getType();
+      String tokenValue = tokenizer.getValue();
+      document.parse(tokenType, tokenValue);     
+      tokenizer.next();
     }
-    
+    return document;
   }
  
   

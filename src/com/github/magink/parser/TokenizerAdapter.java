@@ -1,8 +1,12 @@
 package com.github.magink.parser;
 
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import com.github.magink.tokenizer.Grammar;
+import com.github.magink.tokenizer.GrammarTokenizer;
 import com.github.magink.tokenizer.LexicalException;
+import com.github.magink.tokenizer.Token;
 import com.github.magink.tokenizer.Tokenizer;
 
 public class TokenizerAdapter implements TokenReceiver {
@@ -25,6 +29,7 @@ public class TokenizerAdapter implements TokenReceiver {
       }
     }
   }
+  
 
   @Override
   public boolean hasNext() {
@@ -43,7 +48,7 @@ public class TokenizerAdapter implements TokenReceiver {
 
   private void setupTokenizer(String toTokenize) {
     try {
-      tokenizer = new Tokenizer(grammar, toTokenize);
+      tokenizer = new GrammarTokenizer(grammar, toTokenize);
     } catch(LexicalException e) {
       System.out.println(e);
     }
@@ -53,5 +58,10 @@ public class TokenizerAdapter implements TokenReceiver {
     grammar = new Grammar();
     grammar.addType(Word.REGEX, Word.TYPE);
     grammar.addType(Dot.REGEX, Dot.TYPE);
+  }
+
+  @Override
+  public Iterator<Token> getTokens() {
+    return tokenizer.getTokenIterator();
   }
 }
