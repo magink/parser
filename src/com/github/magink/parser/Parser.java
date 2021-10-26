@@ -1,5 +1,6 @@
 package com.github.magink.parser;
 
+import com.github.magink.tokenizer.Token;
 
 public class Parser {
 
@@ -13,9 +14,8 @@ public class Parser {
 
   public Document parse() {
     while(tokenizer.hasNext()) {
-      String tokenType = tokenizer.getType();
-      String tokenValue = tokenizer.getValue();
-      document.parse(tokenType, tokenValue);     
+      Token token = tokenizer.getToken();
+      document.parse(token);     
       tokenizer.next();
     }
     return document;

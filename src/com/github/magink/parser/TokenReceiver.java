@@ -19,18 +19,10 @@ public interface TokenReceiver {
    */
   public boolean hasNext();
 
-  /**
-   * @return the type of the current token
-   */
-  public String getType();
 
   /**
-   * @return the value of the current token
+   * @return the current token
    */
-  public String getValue();
+  public Token getToken();
 
-  /**
-   * @return the token with both 
-   */
-  public Iterator<Token> getTokens();
 }

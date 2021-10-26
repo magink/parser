@@ -1,5 +1,6 @@
 package com.github.magink.parser;
 
+import com.github.magink.tokenizer.Token;
 
 public class Document extends Node {
   
@@ -13,13 +14,13 @@ public class Document extends Node {
     return sentences;
   }
 
-  protected void parse(String type, String value) {
-    if (type.equals("END")) {
-      return;
-    } else {
+  @Override
+  protected void parse(Token token) {
+    if (token.getType().equals("WORD")) {
       Sentence sentence = new Sentence();
-      sentence.parse(type, value);
+      sentence.parse(token);
       sentences.addSentence(sentence);
     }
-  } 
+  }
+
 }

@@ -2,6 +2,8 @@ package com.github.magink.parser;
 
 import java.util.ArrayList;
 
+import com.github.magink.tokenizer.Token;
+
 public class Sentence extends Node implements EndType {
   private int selectedWord = 0;
   private ArrayList<Word> words;
@@ -35,8 +37,8 @@ public class Sentence extends Node implements EndType {
   }
   
   @Override
-  protected void parse(String type, String value) {
-    if(type.equals(Word.TYPE)) {
+  protected void parse(Token token) {
+    if(token.getType().equals(Word.TYPE)) {
       Word nextWord = new Word(value);
       words.add(nextWord);
     }

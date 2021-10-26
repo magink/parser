@@ -20,27 +20,27 @@ class TestTokenizerAdapter {
   @Test
   @DisplayName("Should get the first token type upon new Tokenizer creation.")
   void shouldGetFirstTokenTypeWhenCreated() {
-    assertEquals(tokenizer.getType(), "WORD");
+    assertEquals(tokenizer.getToken().getType(), "WORD");
   }
 
   @Test
   @DisplayName("Should get the another token type when hit.")
   void shouldGetAnotherTokenTypeWhenHit() {
-    assertEquals(tokenizer.getType(), "WORD");
+    assertEquals(tokenizer.getToken().getType(), "WORD");
   }
 
   @Test
   @DisplayName("Should get the first token type upon new Tokenizer creation.")
   void shouldGetFirstTokenValueWhenCreated() {
-    assertEquals(tokenizer.getValue(), "You");
+    assertEquals(tokenizer.getToken().getValue(), "You");
   }
 
   @Test
   @DisplayName("Should get the next token when stepping forward.")
   void shouldGetNextTokenOnNext(){
-    String currentValue = tokenizer.getValue();
+    String currentValue = tokenizer.getToken().getValue();
     tokenizer.next();
-    assertNotEquals(currentValue, tokenizer.getValue());
+    assertNotEquals(currentValue, tokenizer.getToken().getValue());
   }
 
   @Test
@@ -49,7 +49,7 @@ class TestTokenizerAdapter {
     for(int i = 0; i < 14; i++) {
       tokenizer.next();
     }
-    String currentType = tokenizer.getType();
-    assertEquals("END", tokenizer.getType());
+    String currentType = tokenizer.getToken().getType();
+    assertEquals("END", tokenizer.getToken().getType());
   }
 }
