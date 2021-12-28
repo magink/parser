@@ -5,18 +5,18 @@ import java.util.Iterator;
 
 public class Sentences implements Iterable<Sentence> {
 
-  private ArrayList<Sentence> sentences; 
+  private ArrayList<Sentence> sentenceList; 
   
   public Sentences() {
-    sentences = new ArrayList<>();
+    sentenceList = new ArrayList<>();
   }
 
   public void addSentence(Sentence newSentence) {
-    sentences.add(newSentence);
+    sentenceList.add(newSentence);
   }
 
   @Override
   public Iterator<Sentence> iterator() {
-    return sentences.iterator();
+    return sentenceList.iterator();
   }
 }
