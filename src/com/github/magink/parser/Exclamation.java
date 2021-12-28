@@ -1,10 +1,10 @@
 package com.github.magink.parser;
 
-public class Question extends Sentence {
-  public static final String REGEX = "\\?";
-  public static final String SYMBOL = "?";
-  public static final String TYPE = "QUESTION";
-  public Question () {
+public class Exclamation extends Sentence {
+  public static final String REGEX = "[!]";
+  public static final String SYMBOL = "!";
+  public static final String TYPE = "EXCLAMATION";
+  public Exclamation () {
     super();
   }
   @Override
@@ -18,5 +18,5 @@ public class Question extends Sentence {
   @Override 
   public String toString(){
     return super.toString() + SYMBOL;
-  }  
+  }
 }

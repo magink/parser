@@ -1,49 +1,37 @@
 package com.github.magink.parser;
 
-import java.util.ArrayList;
+public abstract class Sentence implements EndType {
 
-import com.github.magink.tokenizer.Token;
+  private Words wordList;
+  private int selectedWord;
 
-public class Sentence extends Node implements EndType {
-  private int selectedWord = 0;
-  private ArrayList<Word> words;
-  private EndType endType;
-  
   protected Sentence() {
-    endType = new Dot();
-    words = new ArrayList<>();
+    wordList = new Words();
+    selectedWord = 0;
   }
-  public String getEndType() {
-    return endType.getEndType();
+  protected void addWords(Words words) {
+    wordList = words;
   }
-  public void nextWord(){
-    selectedWord = (selectedWord < words.size()) ? selectedWord + 1: words.size() ;
+  public Words getWords() {
+    return wordList;
+  }
+  public Word getWord() {
+    return wordList.get(selectedWord);
+  }
+  public void nextWord() {
+    if(selectedWord < wordList.size()) {
+      selectedWord++;
+    }
   }
   public void previousWord() {
-    selectedWord = (selectedWord > 0 ) ? selectedWord - 1 : 0;
-  }
-  public Word getWord(){
-    return words.get(selectedWord);
-  }
-  public String getWords() {
-    StringBuilder sentence = new StringBuilder();
-    int i = 0;
-    for(Word word: words) {
-      sentence.append(word.getReadableWord());
-      i++;
-      sentence.append(i < words.size() ? " ": endType.getEndType());
+    if(selectedWord > 0) {
+      selectedWord--;
     }
-    return sentence.toString();
   }
-  
   @Override
-  protected void parse(Token token) {
-    if(token.getType().equals(Word.TYPE)) {
-      Word nextWord = new Word(value);
-      words.add(nextWord);
-    }
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    wordList.forEach(word -> builder.append(word.getReadableWord() + " "));
+    return builder.toString().trim();
   }
-
-  
-  
 }
