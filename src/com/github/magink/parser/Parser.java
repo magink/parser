@@ -13,11 +13,10 @@ public class Parser {
   }
 
   public Document parse() {
-    while(tokenizer.hasNext()) {
+    do {
       Token token = tokenizer.getToken();
       document.parse(token);     
-      tokenizer.next();
-    }
+    } while (tokenizer.next());
     return document;
   }
  
