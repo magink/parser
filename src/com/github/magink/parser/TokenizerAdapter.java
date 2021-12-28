@@ -13,7 +13,7 @@ public class TokenizerAdapter implements TokenReceiver {
   private Grammar grammar;
 
   public TokenizerAdapter(String toTokenize){
-    setupWordAndDotGrammar();
+    setupGrammar();
     setupTokenizer(toTokenize);
   }
 
@@ -40,7 +40,7 @@ public class TokenizerAdapter implements TokenReceiver {
     }
   }
   
-  private void setupWordAndDotGrammar() {
+  private void setupGrammar() {
     grammar = new Grammar();
     grammar.addType(Word.REGEX, Word.TYPE);
     grammar.addType(Statement.REGEX, Statement.TYPE);
