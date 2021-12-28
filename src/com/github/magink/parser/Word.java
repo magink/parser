@@ -1,8 +1,6 @@
 package com.github.magink.parser;
 
-import com.github.magink.tokenizer.Token;
-
-public class Word extends Node {
+public class Word {
 
   public static final String REGEX = "[[a-zA-Z]|åäöÅÄÖ]+";
   public static final String TYPE = "WORD";
@@ -15,14 +13,5 @@ public class Word extends Node {
 
   public String getReadableWord() {
     return readableWord;
-  }
-
-  @Override
-  protected void parse(Token token) {
-    if(token.getType().equals(TYPE)){
-      readableWord = value;
-    } else {
-      throw new SyntaxException(token.getType() + " didn't match");
-    }
   }
 }
