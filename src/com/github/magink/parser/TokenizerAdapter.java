@@ -1,6 +1,5 @@
 package com.github.magink.parser;
 
-import java.util.Iterator;
 
 import com.github.magink.tokenizer.Grammar;
 import com.github.magink.tokenizer.GrammarTokenizer;
@@ -19,21 +18,14 @@ public class TokenizerAdapter implements TokenReceiver {
   }
 
   @Override
-  public void next() { 
-    if(hasNext()) {
-      try {
-        tokenizer.nextToken();
-      } catch(LexicalException e) {
-        System.out.println(e);
-      }
+  public boolean next() { 
+    try {
+      tokenizer.nextToken();
+    } catch(LexicalException e) {
+      return false;
     }
-  }
-  
-  @Override
-  public boolean hasNext() {
     return !tokenizer.getActiveTokenType().equals("END");
   }
-
   
   @Override
   public Token getToken() {
@@ -51,7 +43,9 @@ public class TokenizerAdapter implements TokenReceiver {
   private void setupWordAndDotGrammar() {
     grammar = new Grammar();
     grammar.addType(Word.REGEX, Word.TYPE);
-    grammar.addType(Dot.REGEX, Dot.TYPE);
+    grammar.addType(Statement.REGEX, Statement.TYPE);
+    grammar.addType(Exclamation.REGEX, Exclamation.TYPE);
+    grammar.addType(Question.REGEX, Question.TYPE);
   }
 
 

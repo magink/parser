@@ -1,7 +1,5 @@
 package com.github.magink.parser;
 
-import java.util.Iterator;
-
 import com.github.magink.tokenizer.Token;
 
 /**
@@ -12,13 +10,7 @@ public interface TokenReceiver {
   /**
    * Step to next token.
    */
-  public void next();
-  
-  /**
-   * @return true if there is a next token
-   */
-  public boolean hasNext();
-
+  public boolean next();
 
   /**
    * @return the current token
