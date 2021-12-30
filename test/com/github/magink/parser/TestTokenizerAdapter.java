@@ -24,7 +24,7 @@ class TestTokenizerAdapter {
   }
 
   @Test
-  @DisplayName("Should get the another token type when hit.")
+  @DisplayName("Should get another token type when hit.")
   void shouldGetAnotherTokenTypeWhenHit() {
     assertEquals(tokenizer.getToken().getType(), "WORD");
   }
@@ -50,6 +50,6 @@ class TestTokenizerAdapter {
       tokenizer.next();
     }
     String currentType = tokenizer.getToken().getType();
-    assertEquals("END", tokenizer.getToken().getType());
+    assertEquals("END", currentType);
   }
 }
