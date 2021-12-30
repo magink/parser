@@ -11,7 +11,7 @@ public class TestParser {
   Parser parser;
 
   @Test
-  @DisplayName("Correct word is returned from statement.")
+  @DisplayName("Correct word is returned from statement when one statement is parsed.")
   void shouldReturnCorrectWordFromStatement() {
     String input = "I love parsers.";
     String expectedWord = "love";
@@ -20,7 +20,7 @@ public class TestParser {
     parser = new Parser(tokenizer);
 
     Document doc = parser.parse();
-    Sentences sentences = doc.getSentences();
+    Sentences sentences = doc.getAllSentences();
     for(Sentence s : sentences) {
       s.nextWord();
       s.nextWord();
@@ -30,7 +30,7 @@ public class TestParser {
   }
 
   @Test
-  @DisplayName("Two statements are returned.")
+  @DisplayName("Two statements are returned when two statement are parsed.")
   void shouldReturnTwoStatements() {
     String input = "I love parsers. They are fun.";
     int expectedNumberOfStatements = 2;
@@ -39,7 +39,7 @@ public class TestParser {
     parser = new Parser(tokenizer);
 
     Document doc = parser.parse();
-    Sentences sentences = doc.getSentences();
+    Sentences sentences = doc.getAllSentences();
     int countedStatements = 0;
     for(Sentence s : sentences) {
       countedStatements++;
@@ -51,12 +51,13 @@ public class TestParser {
   @DisplayName("Exclamation sentence is returned.")
   void shouldReturnExclamation() {
     String input = "I love parsers!";
+    String expectedType = Exclamation.TYPE;
     tokenizer = new TokenizerAdapter(input);
     parser = new Parser(tokenizer);
     Document doc = parser.parse();
-    Sentences sentences = doc.getSentences();
+    Sentences sentences = doc.getAllSentences();
     for(Sentence s : sentences) {
-      s.getEndType().equals(Exclamation.TYPE);
+      assertEquals(expectedType, s.getEndType());
     }
   }
 
@@ -64,13 +65,13 @@ public class TestParser {
   @DisplayName("Question sentence is returned")
   void shouldReturnQuestion() {
     String input = "Do I love parsers?";
-    
+    String expectedType = Question.TYPE;
     tokenizer = new TokenizerAdapter(input);
     parser = new Parser(tokenizer);
     Document doc = parser.parse();
-    Sentences sentences = doc.getSentences();
+    Sentences sentences = doc.getAllSentences();
     for(Sentence s : sentences) {
-      s.getEndType().equals(Question.TYPE);
+      assertEquals(expectedType, s.getEndType());
     }
   }
 
@@ -95,7 +96,7 @@ public class TestParser {
   @DisplayName("All statement sentences are returned")
   void shouldReturnAllStatements() {
     String input = "This is a statement. No this is! Is it? Yes.";
-    int numberOfStatements = 2;
+    int expectedNumberOfStatements = 2;
 
     tokenizer = new TokenizerAdapter(input);
     parser = new Parser(tokenizer);
@@ -105,14 +106,14 @@ public class TestParser {
     for(Sentence s : statementSentences) {
       count++;
     }
-    assertEquals(numberOfStatements, count);
+    assertEquals(expectedNumberOfStatements, count);
   }
 
   @Test
   @DisplayName("All exclamations are returned")
   void shouldReturnAllExclamations() {
     String input = "Bratan now is the time! Go away necktie. I only ever wanted you to have fun Harry! How did we meet?";
-    int numberOfExclamations = 2;
+    int expectedNumberOfExclamations = 2;
 
     tokenizer = new TokenizerAdapter(input);
     parser = new Parser(tokenizer);
@@ -122,7 +123,7 @@ public class TestParser {
     for(Sentence s : exclamationSentences) {
       count++;
     }
-    assertEquals(numberOfExclamations, count);
+    assertEquals(expectedNumberOfExclamations, count);
   }
 
   @Test
@@ -133,7 +134,7 @@ public class TestParser {
     tokenizer = new TokenizerAdapter(input);
     parser = new Parser(tokenizer);
     Document doc = parser.parse();
-    Sentences exclamationSentences = doc.getSentences();
+    Sentences exclamationSentences = doc.getAllSentences();
     for(Sentence s : exclamationSentences) {
       assertEquals(input, s.toString());
     }
