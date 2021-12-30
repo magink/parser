@@ -22,7 +22,7 @@ public class TokenizerAdapter implements TokenReceiver {
     try {
       tokenizer.nextToken();
     } catch(LexicalException e) {
-      return false;
+      return false; // throw new SyntaxException("Tokenizer couldn't parse this " + e.message)
     }
     return !tokenizer.getActiveTokenType().equals("END");
   }
