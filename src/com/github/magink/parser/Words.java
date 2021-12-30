@@ -8,6 +8,16 @@ public class Words implements Iterable<Word> {
   protected Words(){
     wordArray = new ArrayList<>();
   }
+
+  @Override
+  public Iterator<Word> iterator() {
+    return wordArray.iterator();
+  }
+  @Override
+  public String toString(){
+    return wordArray.toString();
+  }
+
   protected void add(Word word){
     wordArray.add(word);
   }
@@ -16,13 +26,5 @@ public class Words implements Iterable<Word> {
   }
   protected int size() {
     return wordArray.size();
-  }
-  @Override
-  public Iterator<Word> iterator() {
-    return wordArray.iterator();
-  }
-  @Override
-  public String toString(){
-    return wordArray.toString();
   }
 }

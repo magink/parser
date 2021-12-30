@@ -8,6 +8,10 @@ public class Document {
     sentences = new Sentences();
   }
 
+  /**
+   * @return All sentences regardless of type is returned.
+   */
+
   public Sentences getAllSentences() {
     return sentences;
   }

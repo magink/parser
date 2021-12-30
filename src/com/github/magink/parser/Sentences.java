@@ -11,12 +11,12 @@ public class Sentences implements Iterable<Sentence> {
     sentenceList = new ArrayList<>();
   }
 
-  public void addSentence(Sentence newSentence) {
-    sentenceList.add(newSentence);
-  }
-
   @Override
   public Iterator<Sentence> iterator() {
     return sentenceList.iterator();
+  }
+
+  protected void addSentence(Sentence newSentence) {
+    sentenceList.add(newSentence);
   }
 }
