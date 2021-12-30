@@ -58,7 +58,7 @@ Som ett interface mot Tokenizerna har jag en `TokenReceiver` som definerar två 
 
 Skriver ut till Console med färgformattering med ANSI. Det finns en basklass `App.java` som sätter upp koden, skickar in beroenden och texten.
 `PrettyPrinter` har en `print()` method som plockar ut sentences ur `Document` från `Parser` och printar ut dem med olika färger och formattering i privata metoder för varje typ av mening.
-ANSI-koderna för färgerna har jag kopierat från StackOverflow och lagt i Colors klassen.
+ANSI-koderna för färgerna har jag kopierat från StackOverflow och lagt i Colors klassen. Jag själv anser att detta är en okej tillämpning av kopiering då jag länkar till källan samt att det uteslutande är statiska färg-koder för console och ej någon logik.
 Jag är medveten om att dessa är statiska för att jag ska kunna hämta dem utan att behöva instansiera ett Colors objekt, jag själv tycker att sättet jag använder dem på är okej då det ej är metoder.
 
 ## Hur jag testat
